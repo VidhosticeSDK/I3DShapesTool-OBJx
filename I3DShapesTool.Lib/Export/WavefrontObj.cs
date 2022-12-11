@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using I3DShapesTool.Lib.Model;
 using I3DShapesTool.Lib.Tools;
 using System.IO;
@@ -25,6 +26,8 @@ namespace I3DShapesTool.Lib.Export
         private I3DUV[] UVs4 { get; set; }
 
         private I3DVector4[] Colors { get; set; }
+
+        private I3DShapeSubset[] Subsets { get; set; }
 
         public WavefrontObj(I3DShape shape, string name, float scale = 1)
         {
@@ -56,6 +59,8 @@ namespace I3DShapesTool.Lib.Export
 
             if(shape.VertexColor != null)
                 Colors = shape.VertexColor;
+
+            Subsets = shape.Subsets;
         }
 
         /// <summary>
@@ -216,6 +221,11 @@ namespace I3DShapesTool.Lib.Export
             s.WriteLine();
         }
 
+        private static void WriteMaterial(StreamWriter s, uint Material)
+        {
+            s.WriteLine("usemtl {0:F0}", Material);
+        }
+
         /// <summary>
         /// Writes the .obj data to a stream
         /// </summary>
@@ -281,10 +291,28 @@ namespace I3DShapesTool.Lib.Export
                 }
                 WriteSmoothing(s, false);
                 WriteGroup(s, GeometryName);
+
+                uint mat = 1;
+                foreach(I3DShapeSubset sub in Subsets)
+                {
+                    WriteMaterial(s, mat++);
+                    /*
+                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine(sub.FirstIndex/3);
+                    Console.WriteLine(sub.NumIndices/3);
+                    Console.WriteLine("----------------------------------------");
+                    */
+                    for(uint i = 0; i < sub.NumIndices/3; i++)
+                    {
+                        WriteTriangle(s, Triangles[sub.FirstIndex/3 + i]);
+                    }
+                }
+                /*
                 foreach(I3DTri t in Triangles)
                 {
                     WriteTriangle(s, t);
                 }
+                */
             }
         }
     }
