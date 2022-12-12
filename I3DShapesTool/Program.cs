@@ -167,7 +167,7 @@ namespace I3DShapesTool
         {
             foreach(Shape shape in i3dFile.GetShapes())
             {
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));
+                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.objx"));
 
                 I3DShape shapeData = shape.ShapeData;
                 if(shapeData == null)
@@ -186,7 +186,7 @@ namespace I3DShapesTool
         {
             foreach(I3DShape shape in file.Shapes)
             {
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));
+                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.objx"));
                 using FileStream fs = new FileStream(mdlFileName, FileMode.OpenOrCreate, FileAccess.Write);
 
                 new WavefrontObj(shape, shapesFileName)
