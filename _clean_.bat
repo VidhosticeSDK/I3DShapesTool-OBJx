@@ -1,7 +1,6 @@
 @echo off
 
-dotnet clean --configuration Release I3DShapesTool-VC-4UVs-master
+dotnet clean --configuration Release I3DShapesTool-OBJx-master
 
 echo.
-echo PAUSE
 pause
