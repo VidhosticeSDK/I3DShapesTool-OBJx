@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Linq;
 using I3DShapesTool.Lib.Model;
 using I3DShapesTool.Lib.Tools;
@@ -146,8 +146,8 @@ namespace I3DShapesTool.Lib.Export
 
         private void WriteHeader(StreamWriter s)
         {
-            s.WriteLine("# Wavefront OBJ file");
-            s.WriteLine("# Creator: I3DShapesTool by Donkie");
+            s.WriteLine("# Wavefront OBJx file (extension: 4xUV, VertexColor, multiple Materials)");
+            s.WriteLine("# Creator: I3DShapesTool by Donkie (edited by VidhosticeSDK)");
             s.WriteLine("# Name: {0:G}", Name);
             s.WriteLine("# Scale: {0:F}", Scale);
         }
@@ -297,10 +297,10 @@ namespace I3DShapesTool.Lib.Export
                 {
                     WriteMaterial(s, mat++);
                     /*
-                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("--------------------");
                     Console.WriteLine(sub.FirstIndex/3);
                     Console.WriteLine(sub.NumIndices/3);
-                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("--------------------");
                     */
                     for(uint i = 0; i < sub.NumIndices/3; i++)
                     {
