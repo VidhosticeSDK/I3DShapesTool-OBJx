@@ -1,5 +1,9 @@
 @echo off
 
+REM Download:
+REM https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+REM dotnet-sdk-6.0.401-win-x64.zip - OK
+
 REM https://stackoverflow.com/questions/44074121/build-net-core-console-application-to-output-an-exe
 
 REM dotnet publish --output "{any directory}" --runtime {runtime}
