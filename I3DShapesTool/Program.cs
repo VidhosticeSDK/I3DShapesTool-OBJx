@@ -163,11 +163,12 @@ namespace I3DShapesTool
             }
         }
 
-        private static void ExtractFile(I3D i3dFile, string outFolder, CommandLineOptions options)
+        private static void ExtractFile(I3D i3dFile, string outFolder, CommandLineOptions options)      // parsed i3d (xml) data
         {
             foreach(Shape shape in i3dFile.GetShapes())
             {
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}.objx"));
+              //string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));            // orig
+                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}.objx"));  // shapeId + i3d_name
 
                 I3DShape shapeData = shape.ShapeData;
                 if(shapeData == null)
@@ -182,11 +183,13 @@ namespace I3DShapesTool
             }
         }
 
-        private static void ExtractFile(ShapesFile file, string shapesFileName, string outFolder)
+        private static void ExtractFile(ShapesFile file, string shapesFileName, string outFolder)       // only .shapes file
         {
             foreach(I3DShape shape in file.Shapes)
             {
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Id:000}_{shape.Name}.objx"));
+              //string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));            // orig
+                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Id:000}_{shape.Name}.objx"));       // shapeId + shape_name
+
                 using FileStream fs = new FileStream(mdlFileName, FileMode.OpenOrCreate, FileAccess.Write);
 
                 new WavefrontObj(shape, shapesFileName)
