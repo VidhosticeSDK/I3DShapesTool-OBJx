@@ -168,7 +168,7 @@ namespace I3DShapesTool
             foreach(Shape shape in i3dFile.GetShapes())
             {
               //string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));            // orig
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}.objx"));  // shapeId + i3d_name
+                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}_{shape.Id}.objx"));  // shapeId + i3d_Name + i3d_Id
 
                 I3DShape shapeData = shape.ShapeData;
                 if(shapeData == null)
