@@ -7,7 +7,7 @@
     <PublishTrimmed>true</PublishTrimmed>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 
-    <Authors>Donkie</Authors>
+    <Authors>Donkie (edited by VidhosticeSDK)</Authors>
 
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
