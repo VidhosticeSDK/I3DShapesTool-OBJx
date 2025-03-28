@@ -14,5 +14,7 @@ REM   -p:PublishTrimmed={true|false} --self-contained {true|false}
 
 dotnet publish --output "I3DShapesTool-OBJx-EXE" --runtime win-x64 --configuration Release I3DShapesTool-OBJx-master
 
+taskkill /F /IM dotnet.exe
+
 echo.
 pause
