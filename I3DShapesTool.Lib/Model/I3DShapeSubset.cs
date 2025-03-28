@@ -20,7 +20,14 @@ namespace I3DShapesTool.Lib.Model
             NumVertices = br.ReadUInt32();
             FirstIndex = br.ReadUInt32();
             NumIndices = br.ReadUInt32();
-
+/*
+            Console.WriteLine("-------------------\\");
+            Console.WriteLine($"FirstVertex: {FirstVertex}");
+            Console.WriteLine($"NumVertices: {NumVertices}");
+            Console.WriteLine($"FirstIndex: {FirstIndex}");
+            Console.WriteLine($"NumIndices: {NumIndices}");
+            Console.WriteLine("-------------------/");
+*/
             if(version >= 6)
             {
                 if(options.HasFlag(I3DShapeOptions.HasUV1))
