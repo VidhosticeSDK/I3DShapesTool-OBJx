@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using I3DShapesTool.Lib.Container;
 using I3DShapesTool.Lib.Tools;
 using I3DShapesTool.Lib.Tools.Extensions;
@@ -91,10 +92,31 @@ namespace I3DShapesTool.Lib.Model
             I3DShapeOptions options = (I3DShapeOptions)options_num;
             OptionsHighBits = options_num & ~(uint)I3DShapeOptions.All;
 
+            // Console.WriteLine($"numSubsets: {numSubsets}");
+
+            if(fileVersion >= 10)
+            {
+                float VtxCompression = reader.ReadSingle();
+                Console.WriteLine($"VtxCompression: {VtxCompression}");
+            }
+
             Subsets = new I3DShapeSubset[numSubsets];
             for(int i = 0; i < numSubsets; i++)
             {
                 Subsets[i] = new I3DShapeSubset(reader, fileVersion, options);
+            }
+
+            if(fileVersion >= 10)
+            {
+                for(int i = 0; i < numSubsets; i++)
+                {
+                    int countToRead = reader.ReadUInt16();
+                    byte[] strValue = reader.ReadBytes(countToRead);
+                    string matName = Encoding.Default.GetString(strValue);
+
+                    Console.WriteLine($"Subset: {i} - matName: \"{matName}\"");
+                }
+                reader.BaseStream.Align(4);
             }
 
             Triangles = new I3DTri[cornerCount / 3];
