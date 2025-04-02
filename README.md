@@ -1,5 +1,7 @@
 # Modification by VidhosticeSDK
 
+## March 2025: Added support for FS25 (for testing).
+
 Same as below, we added to the export: 4xUV, VertexColor, multiple Materials
 
 ```
