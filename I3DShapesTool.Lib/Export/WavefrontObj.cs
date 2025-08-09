@@ -169,7 +169,7 @@ namespace I3DShapesTool.Lib.Export
 
         private void WriteVertexWithColor(StreamWriter s, I3DVector vec, I3DVector4 col)
         {
-            s.WriteLine("v {0:F6} {1:F6} {2:F6} {3:F6} {4:F6} {5:F6}", vec.X * Scale, vec.Y * Scale, vec.Z * Scale, col.X, col.Y, col.Z);
+            s.WriteLine("v {0:F6} {1:F6} {2:F6} {3:F6} {4:F6} {5:F6} {6:F6}", vec.X * Scale, vec.Y * Scale, vec.Z * Scale, col.X, col.Y, col.Z, col.W);
         }
 
         private static void WriteUV(StreamWriter s, I3DUV uv)
