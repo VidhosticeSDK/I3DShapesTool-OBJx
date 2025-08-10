@@ -1,6 +1,10 @@
 # Modification by VidhosticeSDK
 
-## March 2025: Added support for FS25 (for testing).
+**28.3.2025 - Added support for FS25**
+
+**10.8.2025 - Added: Vertex Alpha**
+
+---
 
 Same as below, we added to the export: 4xUV, VertexColor, multiple Materials
 
@@ -12,8 +16,8 @@ Same as below, we added to the export: 4xUV, VertexColor, multiple Materials
 
 g default
 
-v 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000           <- Vertex Color
-v -1.000000 1.000000 1.000000 1.000000 1.000000 1.000000
+v 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000           <- Vertex Color & Alpha
+v -1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000
 ...
 ...
 vt 0.625000 0.750000            <- UV1
