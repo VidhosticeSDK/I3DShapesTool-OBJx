@@ -75,7 +75,8 @@ namespace I3DShapesTool.Lib.Model
                             {
                                 I3DPart part = LoadPart(entityRaw, entityRaw.EntityType, reader.Endian, reader.Header.Version);
 
-                                if(entityRaw.Type == 0 || entityRaw.Type > (int)EntityType.Last)
+//                              if(entityRaw.Type == 0 || entityRaw.Type > (int)EntityType.Last)
+                                if(entityRaw.Type == 0 || entityRaw.Type == 3 || entityRaw.Type == 4 || entityRaw.Type == 5 || entityRaw.Type > 6)  // EntityType.cs
                                     Logger.Instance.LogInformation("Loaded part {name} with unknown type {type}.", part.Name, entityRaw.Type);
 
                                 return part;
@@ -148,6 +149,9 @@ namespace I3DShapesTool.Lib.Model
                     part = new I3DShape();
                     break;
                 case EntityType.Spline:
+                    part = new Spline();
+                    break;
+                case EntityType.SplineL:
                     part = new Spline();
                     break;
                 case EntityType.Unknown:
