@@ -168,19 +168,31 @@ namespace I3DShapesTool
         {
             foreach(Shape shape in i3dFile.GetShapes())
             {
-              //string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));            // orig
-                string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}_{shape.Id}.objx"));  // shapeId + i3d_Name + i3d_Id
-
                 I3DShape shapeData = shape.ShapeData;
-                if(shapeData == null)
-                    throw new ArgumentException("Shape doesn't have any assigned shape data");
+                if(shapeData != null)
+                {
+                  //string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.Name}_{shape.Id}.obj"));            // orig
+                    string mdlFileName = Path.Combine(outFolder, CleanFileName($"{shape.ShapeId:000}_{shape.Name}_{shape.Id}.objx"));  // shapeId + i3d_Name + i3d_Id
 
-                using FileStream fs = new FileStream(mdlFileName, FileMode.OpenOrCreate, FileAccess.Write);
 
-                WavefrontObj objfile = new WavefrontObj(shapeData, i3dFile.Name, 1);
-                if(options.Transform)
-                    objfile.Transform(shape.AbsoluteTransform);
-                objfile.Export(fs);
+                    Console.WriteLine("-----********------\\");
+                    Console.WriteLine($"mdlFileName: {mdlFileName}");
+                    Console.WriteLine($"shape.Name: {shape.Name}");
+                    Console.WriteLine($"shape.ShapeData.Type: {shape.ShapeData.Type}");
+                    Console.WriteLine("-----********------/");
+
+
+                    //I3DShape shapeData = shape.ShapeData;
+                    //if(shapeData == null)
+                    //    throw new ArgumentException("Shape doesn't have any assigned shape data");
+
+                    using FileStream fs = new FileStream(mdlFileName, FileMode.OpenOrCreate, FileAccess.Write);
+
+                    WavefrontObj objfile = new WavefrontObj(shapeData, i3dFile.Name, 1);
+                    if(options.Transform)
+                        objfile.Transform(shape.AbsoluteTransform);
+                    objfile.Export(fs);
+                }
             }
         }
 
@@ -207,21 +219,23 @@ namespace I3DShapesTool
 
                 using(StreamWriter s = new InvariantStreamWriter(fs))
                 {
-                    s.WriteLine("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n"
-                        +"<i3D name=\"3.i3d\" version=\"1.6\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"http://i3d.giants.ch/schema/i3d-1.6.xsd\">\n"
-                        +"  <Asset><Export program=\"GIANTS Editor 64bit\" version=\"9.0.4\"/></Asset>\n"
+                    s.WriteLine(
+                         "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n"
+                        +"<i3D name=\"spline.i3d\" version=\"1.6\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"http://i3d.giants.ch/schema/i3d-1.6.xsd\">\n"
+                        +"  <Asset><Export program=\"GIANTS Editor 64bit\" version=\"10.0.6\"/></Asset>\n"
                         +"  <Files></Files>\n"
-                        +"  <Materials><Material name=\"UnnamedMaterial\" materialId=\"6\" diffuseColor=\"1 1 1 1\"></Material></Materials>\n"
+                        +"  <Materials></Materials>\n"
                         +"  <Shapes>\n"
-                        +"    <NurbsCurve name=\"splineGeometry\" shapeId=\"1\" type=\"cubic\" degree=\"3\" form=\"open\">");
+                        +"    <NurbsCurve name=\"splineGeometry\" shapeId=\"1\" type=\"cubic\" degree=\"3\" form=\"open\">");   // type=\"linear\"  form=\"closed\"
                     foreach(I3DVector p in spline.Points)
                     {
-                        s.WriteLine("      <cv c=\"{0:F6} {1:F6} {2:F6}\"/>", p.X, p.Y, p.Z);
+                        s.WriteLine(
+                         "      <cv c=\"{0:F6} {1:F6} {2:F6}\"/>", p.X, p.Y, p.Z);
                     }
-                    s.WriteLine("    </NurbsCurve>\n"
+                    s.WriteLine(
+                         "    </NurbsCurve>\n"
                         +"  </Shapes>\n"
-                        +"  <Dynamics></Dynamics>\n"
-                        +"  <Scene><Shape shapeId=\"1\" name=\"spline\" nodeId=\"5\" distanceBlending=\"false\"/></Scene>\n"
+                        +"  <Scene><Shape name=\"spline\" shapeId=\"1\" nodeId=\"7\" castsShadows=\"false\" receiveShadows=\"false\" distanceBlending=\"false\"/></Scene>\n"
                         +"</i3D>");
                 }
                 i += 1;
