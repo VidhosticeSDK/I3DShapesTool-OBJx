@@ -2,6 +2,10 @@
 
 taskkill /F /IM dotnet.exe
 
+
+dotnet clean --configuration Release I3DShapesTool-OBJx-master
+
+
 REM Download:
 REM https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 REM dotnet-sdk-6.0.401-win-x64.zip - OK
