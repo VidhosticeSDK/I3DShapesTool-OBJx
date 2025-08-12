@@ -26,7 +26,9 @@ namespace I3DShapesTool.Lib.Container
                     case 1:
                         return EntityType.Shape;
                     case 2:
-                        return EntityType.Spline;
+                        return EntityType.Spline;       // Spline: Cubic
+                    case 6:
+                        return EntityType.SplineL;      // Spline: Linear
                     default:
                         return EntityType.Unknown;
                 }
